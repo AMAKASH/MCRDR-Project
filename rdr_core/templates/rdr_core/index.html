@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% load static %}
+{% block title %}RDR System{%endblock title %} {% block css_files %}
+<link rel="stylesheet" href="{% static 'rdr_core/css/app.css' %}">
+{% endblock css_files %}
+{% block content %}
+
+
+<h2 class="text-center py-2">Cases</h2>
+
+<div class="d-flex justify-content-center">
+    <table class="table table-hover text-center table-striped">
+        <caption>End of Dataset</caption>
+        <thead class="sticky-top stickTop-background ">
+            <tr>
+                <th>
+                    #
+                </th>
+                {% for col in dataset.columns %}
+                {% if col == 'conclusion' %}
+                <th scope="col"><a href="/run-till-error"><button class="btn btn-light">{{col|title}}</button></a></th>
+                {% else %}
+                <th scope="col">{{col|title}}</th>
+                {% endif %}
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in dataset.iterrows %}
+            <tr class="table-row">
+                <td>
+                    {{ index }}
+                </td>
+                {% for cell in row %}
+                <td>
+                    {{cell}}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+{% include 'rdr_core/partials/addRule.html' %}
+
+{% endblock content %}
+{% block js_files %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'rdr_core/scripts/app.js' %}"></script>
+
+
+{% endblock js_files %}

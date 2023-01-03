@@ -1,0 +1,88 @@
+<div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle">Add a Rule For the case</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <table class="table table-responsive table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    #
+                                </th>
+                                {% for col in features %}
+                                <th scope="col">{{col|title}}</th>
+                                {% endfor %}
+                                <th scope="col">conclusion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="addRule_cur_case">
+                                <th scope="row">current case</th>
+                                {% for col in features %}
+                                <td scope="col">&#x254D;</td>
+                                {% endfor %}
+                                <td scope="col">&#x254D;</td>
+                            </tr>
+                            <tr id="addRule_corner_case">
+                                <th scope="row">cornerstone</th>
+                                {% for col in features %}
+                                <td scope="col">&#x254D;</td>
+                                {% endfor %}
+                                <td scope="col">&#x254D;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="runCaseAction()">Run Case</button>
+                <span>
+                    <h6>Final Conclusion: <span id="final-conclusion-msg"></span></h6>
+                </span>
+                <div class="my-2">
+                    <h3>Add a new rule for this case:</h3>
+                    <form id="add-rule-form">
+                        <table class="table table-responsive table-hover text-center">
+                            <thead>
+                                <tr>
+                                    {% for col in features %}
+                                    <th scope="col">{{col}}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for col in features %}
+                                    <td>
+                                        <input type="text" class="form-control" id="add-condition{{ forloop.counter0 }}"
+                                            name="condition{{ forloop.counter0 }}" placeholder="condition">
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <label for="newconclusionInput">Conclusion</label>
+                        <input type="text" class="form-control input-size2" id="conclusion" name="conclusion"
+                            placeholder=" New Conclusion or N/A for Stopping Rule" required>
+
+                    </form>
+                </div>
+                <span class="float-left">
+                    <h6 id="msg-area"></h6>
+                </span>
+            </div>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addRuleAction()">Add Rule</button>
+            </div>
+        </div>
+    </div>
+</div>
